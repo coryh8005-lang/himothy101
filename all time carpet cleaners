@@ -1,0 +1,66 @@
+---
+layout: default
+title: Home
+---
+
+<!-- Custom Navigation Bar -->
+<header style="background-color:#033E8C; padding:15px 0; text-align:center; color:white;">
+  <h1 style="margin:0; font-size:2rem;">All Time Carpet Cleaners</h1>
+  <nav style="margin-top:10px;">
+    <a href="#deals" style="color:white; text-decoration:none; margin:0 15px; font-weight:bold;">Deals</a>
+    <a href="#contact" style="color:white; text-decoration:none; margin:0 15px; font-weight:bold;">Contact</a>
+  </nav>
+</header>
+
+<!-- Main Deals Section -->
+<div class="container" id="deals" style="margin: 40px auto; max-width: 1000px;">
+  <h2 style="text-align:center; margin-bottom:30px; color:#033E8C;">Our Cleaning Deals</h2>
+  <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:20px;">
+    
+    <!-- Regular Cleaning -->
+    <div style="background:#fff; border:2px solid #033E8C; border-radius:15px; padding:20px; text-align:center;">
+      <h3 style="color:#FF8C42;">Regular Cleaning</h3>
+      <p>In-home first level carpet cleaning, perfect for maintaining cleanliness and freshness.</p>
+      <p style="font-weight:bold; font-size:1.4rem; color:#033E8C;">$100</p>
+      <button style="background:#033E8C; color:#fff; border:none; padding:10px 20px; border-radius:8px; cursor:pointer;"
+        onclick="window.open('https://wa.me/1234567890?text=Hello!%20I%20would%20like%20to%20book%20a%20Regular%20Cleaning%20for%20my%20home.', '_blank')">
+        Book Now
+      </button>
+    </div>
+
+    <!-- Deluxe Cleaning -->
+    <div style="background:#fff; border:2px solid #033E8C; border-radius:15px; padding:20px; text-align:center;">
+      <h3 style="color:#FF8C42;">Deluxe Cleaning</h3>
+      <p>All carpets owned by the customer will be thoroughly cleaned for a spotless finish.</p>
+      <p style="font-weight:bold; font-size:1.4rem; color:#033E8C;">$175</p>
+      <button style="background:#033E8C; color:#fff; border:none; padding:10px 20px; border-radius:8px; cursor:pointer;"
+        onclick="window.open('https://wa.me/1234567890?text=Hello!%20I%20would%20like%20to%20book%20a%20Deluxe%20Cleaning%20for%20all%20my%20carpets.', '_blank')">
+        Book Now
+      </button>
+    </div>
+
+    <!-- Stain Cleaning -->
+    <div style="background:#fff; border:2px solid #033E8C; border-radius:15px; padding:20px; text-align:center;">
+      <h3 style="color:#FF8C42;">Stain Cleaning</h3>
+      <p>Specialized stain removal service to target problem areas without affecting other areas.</p>
+      <p style="font-weight:bold; font-size:1.4rem; color:#033E8C;">$50</p>
+      <button style="background:#033E8C; color:#fff; border:none; padding:10px 20px; border-radius:8px; cursor:pointer;"
+        onclick="window.open('https://wa.me/1234567890?text=Hello!%20I%20would%20like%20to%20book%20a%20Stain%20Cleaning%20for%20my%20carpet.', '_blank')">
+        Book Now
+      </button>
+    </div>
+
+  </div>
+</div>
+
+<!-- Contact Section -->
+<div class="container" id="contact" style="margin:50px auto; max-width:700px; text-align:center;">
+  <h2 style="color:#033E8C;">Contact Us</h2>
+  <p>Call or WhatsApp us at <strong><a href="https://wa.me/1234567890" target="_blank" style="color:#FF8C42;">(123) 456-7890</a></strong></p>
+</div>
+
+<!-- Custom Footer -->
+<footer style="background-color:#033E8C; color:white; text-align:center; padding:15px; margin-top:40px;">
+  <p>&copy; {{ site.time | date: "%Y" }} All Time Carpet Cleaners | Making Your Carpets Shine</p>
+  <p><a href="https://wa.me/1234567890" target="_blank" style="color:#FF8C42; font-weight:bold;">Chat with us on WhatsApp</a></p>
+</footer>
