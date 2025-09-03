@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Time Carpet Cleaners</title>
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #FFF8F0;
+            color: #033E8C;
+        }
+
+        header {
+            background-color: #FFB347;
+            padding: 20px 10px;
+            text-align: center;
+            color: #033E8C;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2rem;
+        }
+
+        nav {
+            margin-top: 10px;
+        }
+
+        nav a {
+            color: #033E8C;
+            text-decoration: none;
+            margin: 0 10px;
+            font-weight: bold;
+            font-size: 1rem;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 30px auto;
+        }
+
+        .deals {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .deal {
+            background-color: #FFFFFF;
+            border: 2px solid #033E8C;
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .deal:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+
+        .deal h2 {
+            color: #FF8C42;
+            font-size: 1.6rem;
+            margin-bottom: 10px;
+        }
+
+        .deal p {
+            font-size: 1rem;
+            margin-bottom: 15px;
+        }
+
+        .deal .price {
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: #033E8C;
+            margin-bottom: 10px;
+        }
+
+        .deal button {
+            background-color: #033E8C;
+            color: #FFF8F0;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .deal button:hover {
+            background-color: #FF8C42;
+        }
+
+        #contact p {
+            text-align: center;
+            font-size: 1.1rem;
+        }
+
+        #contact a {
+            color: #033E8C;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        #contact a:hover {
+            text-decoration: underline;
+        }
+
+        footer {
+            background-color: #FFB347;
+            text-align: center;
+            padding: 15px 0;
+            margin-top: 40px;
+            font-size: 0.9rem;
+        }
+
+        a:focus, button:focus {
+            outline: 3px solid #033E8C;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>All Time Carpet Cleaners</h1>
+        <nav>
+            <a href="#deals">Our Deals</a>
+            <a href="#contact">Contact</a>
+        </nav>
+    </header>
+
+    <div class="container" id="deals">
+        <h2 style="text-align:center; margin-bottom:30px;">Our Cleaning Deals</h2>
+        <div class="deals">
+            <!-- Level 1 -->
+            <div class="deal">
+                <h2>Regular Cleaning</h2>
+                <p>In-home first level carpet cleaning, perfect for maintaining cleanliness and freshness.</p>
+                <p class="price">$100</p>
+                <button onclick="window.open('https://wa.me/1234567890?text=Hello!%20I%20would%20like%20to%20book%20a%20Regular%20Cleaning%20for%20my%20home.', '_blank')">Book Now</button>
+            </div>
+
+            <!-- Level 2 -->
+            <div class="deal">
+                <h2>Deluxe Cleaning</h2>
+                <p>All carpets owned by the customer will be thoroughly cleaned for a spotless finish.</p>
+                <p class="price">$175</p>
+                <button onclick="window.open('https://wa.me/1234567890?text=Hello!%20I%20would%20like%20to%20book%20a%20Deluxe%20Cleaning%20for%20all%20my%20carpets.', '_blank')">Book Now</button>
+            </div>
+
+            <!-- Level 3 -->
+            <div class="deal">
+                <h2>Stain Cleaning</h2>
+                <p>Specialized stain removal service to target problem areas without affecting other areas.</p>
+                <p class="price">$50</p>
+                <button onclick="window.open('https://wa.me/1234567890?text=Hello!%20I%20would%20like%20to%20book%20a%20Stain%20Cleaning%20for%20my%20carpet.', '_blank')">Book Now</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="container" id="contact" style="margin-top:50px;">
+        <h2 style="text-align:center; margin-bottom:20px;">Contact Us</h2>
+        <p>Call or WhatsApp us at <strong><a href="https://wa.me/1234567890" target="_blank">(123) 456-7890</a></strong></p>
+    </div>
+
+    <footer>
+        &copy; 2025 All Time Carpet Cleaners. All Rights Reserved.
+    </footer>
+</body>
+</html>
