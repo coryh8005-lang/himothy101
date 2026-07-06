@@ -49,6 +49,7 @@ const config: ExpoConfig = {
       },
     ],
     'expo-sqlite',
+    'expo-notifications',
   ],
   experiments: {
     typedRoutes: true,

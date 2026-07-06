@@ -4,93 +4,93 @@
 
 ## Current state
 
-**M1 — Onboarding + Goals + Home: ✅ complete** (built 2026-07-06, same cloud session as M0).
-The app now has a real first-run experience and a working goals loop: onboarding
-(welcome → pick build/break/quit + name it → motivation in your own words) creates the first
-goal, the Today dashboard shows active goals with streak labels and a "+ New goal" button,
-and each goal opens a detail screen with its motivation and an archive option. All data is
-in SQLite, so goals survive relaunch by construction.
+**M2 — Check-ins + notifications: ✅ built** (2026-07-06, same cloud session as M0–M1).
+The solo core loop minus the vault is now in place: three daily check-in reminders
+(user-editable times, expo-notifications local triggers), a check-in flow (mood 1–5, urge
+0–10, slip toggle with per-goal attribution and a note), streak counting driven by
+check-ins and slips, and Progress is now a real unified activity log.
+
+### What M2 added
+
+- `src/notifications/` — schedules three repeating daily local notifications from the
+  `notification_schedules` table (defaults 8:30 / 14:30 / 21:00, seeded on first Settings
+  visit); reconciles OS state on every change; tapping a reminder deep-links to the
+  check-in screen
+- `checkin/new` modal — mood/urge chips, "did you slip?" with goal attribution ("this is
+  data, not a verdict"), optional note
+- Streak rule v1: first check-in of a local day counts the day for every active goal; a
+  slip logged against a goal resets that goal's current streak to 0 (longest is kept)
+- Today: live "X of 3 today" check-in card + "Check in now"
+- Progress: merged, time-sorted log of check-ins and slip-ups (unlock events join in M4)
+- Settings: per-reminder time picker (iOS compact / Android dialog) + enable switches +
+  permission request
 
 ### Verification record
 
-Built in a Linux cloud container (no iOS Simulator there). Verified this session:
+Built in a Linux cloud container (no iOS Simulator/device there). Verified this session:
 
-- ✅ `npm run typecheck` — TypeScript strict, clean (typed routes included)
-- ✅ `npm run verify:db` — migrations against real SQLite: 8 tables, joins, FKs pass
-- ✅ `npx expo export --platform ios` — full Metro/Hermes bundle compiles with the new
-  route tree (root stack → tabs group + onboarding + goal modals)
-- ⬜ **Simulator check pending (M0+M1 together)** — on a Mac: `npx expo start`, press `i`,
-  confirm: app boots into onboarding → create a goal → lands on Today with the goal card →
-  relaunch the app → goal still there (M1 acceptance) → "+ New goal" and archive both work.
+- ✅ `npm run typecheck` · ✅ `npm run verify:db` · ✅ `npx expo export --platform ios`
+- ⬜ **Device check pending (the real M2 acceptance):** on Connor's iPhone or Simulator —
+  Settings → allow notifications → set a reminder ~2 min out → notification fires → tap it
+  → check-in screen opens → complete it → appears in Progress and Today's counter; also
+  confirm a slip check-in resets that goal's streak. (Notifications need a real device to
+  fully verify; Simulator shows banners for local notifications too.)
+- ⬜ Simulator run-through of M0/M1 flows (carried over)
 
 ## Milestones
 
 | Milestone | Status |
 |---|---|
 | M0 — Scaffold | ✅ 2026-07-06 |
-| M1 — Onboarding + Goals + Home | ✅ 2026-07-06 (Simulator check pending, see above) |
-| M2 — Check-ins + notifications | ⬜ next |
-| 🔒 CONNOR GATE — Apple Developer enrollment | ⬜ (after M2; guide ready in `docs/APPLE_SETUP.md`) |
-| M3 — Vault core | ⬜ |
+| M1 — Onboarding + Goals + Home | ✅ 2026-07-06 |
+| M2 — Check-ins + notifications | ✅ built 2026-07-06 (device check pending) |
+| 🔒 CONNOR GATE — Apple Developer enrollment | ⬜ **NOW OPEN — see below** |
+| M3 — Vault core | ⬜ next after the gate |
 | M4 — Unlock + auto-relock | ⬜ |
 | M5 — Intercept polish | ⬜ |
 | M6 — Progress/Settings/Profile hardening | ⬜ |
 
 ## Decisions log
 
-**2026-07-06 (M1):**
+**2026-07-06 (M2):**
 
-- Route tree: root Stack → `(tabs)` group + `onboarding/` (3-screen flow, swipe-back
-  disabled) + `goal/new` and `goal/[id]` as modals
-- Onboarding is gated by a `kv` flag (`onboarding_complete`); Today redirects to it on
-  first launch
-- Onboarding intentionally lean (welcome → goal → motivation); permissions, check-in-time,
-  and vault-setup steps join the flow in M2/M3 when those features exist
-- Streaks: every goal gets a `streaks` row at creation; display-only for now
-  ("Day 1 starts today" until counting logic lands with check-ins in M2)
-- Archiving never deletes — goals are soft-archived, history stays
-- Design system grew: `Button` (primary/secondary/ghost), `TextField`, `KindSelector`
+- Reminder defaults 08:30 / 14:30 / 21:00; `notification_schedules` is source of truth,
+  `applySchedules()` reconciles the OS (cancel + reschedule + store identifiers)
+- Check-ins are global (not per-goal); slips are attributed to a goal via chips
+- A slip during check-in writes both the check-in row and a `slip_ups` row
+- Streak rule v1 as described above; deliberately simple, recomputable later
+- Notification deep-link uses `data.url` + `useLastNotificationResponse` in the root layout
+- Sound off for reminders (calm by default); revisit with user feedback
 
-**2026-07-06 (M0):**
+**2026-07-06 (M1):** root Stack → (tabs) + onboarding + modals; onboarding gated by kv
+flag; streak row per goal; soft-archive only; Button/TextField/KindSelector added.
 
-- Repo: WHOIAM lives in the `WHOIAM/` folder of the `himothy101` GitHub repo
-- Bundle IDs locked: app `com.whoiam.app`, extensions
-  `com.whoiam.app.{ShieldConfiguration,ShieldAction,ActivityMonitor}`, App Group
-  `group.com.whoiam.app` — table in `docs/APPLE_SETUP.md`
-- Routes live in `src/app/` (SDK 57 template convention) rather than PLAN.md's root `app/`
-- DB: Drizzle ORM over expo-sqlite; migrations applied on launch; `npm run verify:db`
-  tests them on real SQLite
-- Design tokens: warm neutrals + deep sage-teal (`#2F6E62` light / `#7FBFAF` dark), dark
-  mode first-class; native tabs use SF Symbols (Android icons deferred)
-- App version starts at 0.1.0
+**2026-07-06 (M0):** repo `himothy101/WHOIAM`; bundle IDs locked (`com.whoiam.app` + 3
+extension IDs + App Group, table in `docs/APPLE_SETUP.md`); routes in `src/app/`; Drizzle
+over expo-sqlite with launch-time migrations; sage-teal design tokens, dark mode
+first-class; v0.1.0.
 
-**2026-07-03 (planning):**
-
-- Platform: **iOS first**, Android later · app name **WHOIAM**
-- First milestone: working MVP on Connor's own iPhone
-- Stack: Expo/React Native + react-native-device-activity, expo-sqlite local-first,
-  Supabase/RevenueCat/Claude API in later phases
-- Connor will enroll in the Apple Developer Program ($99/yr) — required before M3, not M0–M2
-- Community, chatbot, paywall sequenced after the solo core loop (Phases 2–4)
+**2026-07-03 (planning):** iOS first · name WHOIAM · MVP on Connor's iPhone first ·
+Expo + react-native-device-activity + expo-sqlite local-first · Apple Developer enrollment
+before M3 · community/chatbot/paywall in Phases 2–4.
 
 ## Next step
 
-Execute **M2 — Check-ins + notifications** from `PLAN.md`: three user-scheduled repeating
-daily local notifications (expo-notifications), the check-in flow (mood 1–5, urge 0–10,
-had-slip + note), and Progress activity log v1. *Verify on a device: schedule a
-notification 2 minutes out → it fires → complete the check-in → it appears in Progress.*
+**🔒 CONNOR GATE is now open.** M3 (the vault — the make-or-break feature) requires the
+Apple Developer Program. Connor: follow the click-by-click guide in `docs/APPLE_SETUP.md`
+(≈10 minutes + $99/yr; approval usually <48h), then start the next session with
+*"enrollment approved"*.
 
-**After M2 is verified comes the 🔒 CONNOR GATE:** Apple Developer enrollment
-(`docs/APPLE_SETUP.md` has the click-by-click guide).
+Meanwhile the next coding session can also: run the pending Simulator/device checks above,
+and (optional, no Apple account needed) polish branding (app icon/splash).
 
 ## Connor to-do queue
 
-- None right now.
+1. **Enroll in the Apple Developer Program** — `docs/APPLE_SETUP.md`, top section.
+   Everything for M3 is blocked on this; M0–M2 device checks are not.
 
 ## Open items
 
 - Subscription pricing (decide during Phase 3)
-- Visual branding (app icon/splash still Expo defaults; onboarding/dashboard now exist to
-  anchor the direction)
-- `expo lint` needs one online run to finish ESLint setup (blocked by the cloud proxy;
-  harmless)
+- Visual branding (app icon/splash still Expo defaults)
+- `expo lint` needs one online run to finish ESLint setup (cloud proxy blocks it; harmless)

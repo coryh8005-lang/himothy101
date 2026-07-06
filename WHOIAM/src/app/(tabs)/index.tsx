@@ -1,4 +1,4 @@
-import { eq } from 'drizzle-orm';
+import { eq, gte } from 'drizzle-orm';
 import { useLiveQuery } from 'drizzle-orm/expo-sqlite';
 import { Link, Redirect, useRouter } from 'expo-router';
 import { Pressable, StyleSheet } from 'react-native';
@@ -8,7 +8,8 @@ import { Card } from '@/components/card';
 import { Screen } from '@/components/screen';
 import { ThemedText } from '@/components/themed-text';
 import { db } from '@/db/client';
-import { goals, streaks } from '@/db/schema';
+import { checkIns, goals, streaks } from '@/db/schema';
+import { startOfLocalDay } from '@/features/checkins';
 import { isFlagSet, ONBOARDING_COMPLETE } from '@/features/flags';
 import { GOAL_KINDS, streakLabel } from '@/features/goals';
 
@@ -37,6 +38,10 @@ export default function TodayScreen() {
       .leftJoin(streaks, eq(streaks.goalId, goals.id))
       .where(eq(goals.status, 'active')),
   );
+  const { data: todaysCheckIns } = useLiveQuery(
+    db.select().from(checkIns).where(gte(checkIns.completedAt, startOfLocalDay())),
+  );
+  const checkInsToday = todaysCheckIns?.length ?? 0;
 
   // First launch goes through onboarding (kv flag; synchronous tiny read).
   if (!isFlagSet(ONBOARDING_COMPLETE)) {
@@ -81,11 +86,15 @@ export default function TodayScreen() {
       <ThemedText type="smallBold" style={styles.sectionLabel} themeColor="textSecondary">
         CHECK-INS
       </ThemedText>
-      <Card title="Daily check-ins">
+      <Card title={`${checkInsToday} of 3 today`}>
         <ThemedText type="small" themeColor="textSecondary">
-          Three gentle check-ins a day — mood, urges, honest wins and slips. Coming in milestone
-          M2.
+          {checkInsToday === 0
+            ? 'No check-ins yet today. 30 seconds of honesty, whenever you’re ready.'
+            : checkInsToday >= 3
+              ? 'All three done — that’s showing up for yourself.'
+              : 'Keep going. Reminders are set in Settings.'}
         </ThemedText>
+        <Button label="Check in now" onPress={() => router.push('/checkin/new')} />
       </Card>
     </Screen>
   );
