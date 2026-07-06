@@ -38,7 +38,7 @@ export default function OnboardingMotivationScreen() {
           <ThemedView style={styles.form}>
             <ThemedText type="subtitle">Why does this matter?</ThemedText>
             <ThemedText themeColor="textSecondary">
-              Your own words, for the moments that get hard. They'll show up when you need them —
+              Your own words, for the moments that get hard. They’ll show up when you need them —
               including on the lock screen of the apps you vault later.
             </ThemedText>
             <TextField

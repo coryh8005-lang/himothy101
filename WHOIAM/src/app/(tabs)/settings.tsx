@@ -3,7 +3,7 @@ import { asc } from 'drizzle-orm';
 import { useLiveQuery } from 'drizzle-orm/expo-sqlite';
 import Constants from 'expo-constants';
 import { useEffect, useState } from 'react';
-import { Platform, Pressable, StyleSheet, Switch } from 'react-native';
+import { Linking, Platform, Pressable, StyleSheet, Switch } from 'react-native';
 
 import { Card } from '@/components/card';
 import { Button } from '@/components/button';
@@ -105,6 +105,23 @@ export default function SettingsScreen() {
             />
           </ThemedView>
         ))}
+      </Card>
+
+      <Card title="If it's heavy right now">
+        <ThemedText type="small" themeColor="textSecondary">
+          You don’t have to carry it alone. These lines are free, confidential, and always
+          open — and calling works even without internet.
+        </ThemedText>
+        <Button
+          label="Call or text 988 — Suicide & Crisis Lifeline"
+          variant="secondary"
+          onPress={() => Linking.openURL('tel:988')}
+        />
+        <Button
+          label="Call SAMHSA 1-800-662-4357 — substance use help"
+          variant="secondary"
+          onPress={() => Linking.openURL('tel:18006624357')}
+        />
       </Card>
 
       <Card title="Vault rules">

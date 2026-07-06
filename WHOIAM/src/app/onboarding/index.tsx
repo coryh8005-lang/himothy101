@@ -18,10 +18,10 @@ export default function WelcomeScreen() {
             WHOIAM
           </ThemedText>
           <ThemedText type="title" style={styles.headline}>
-            Every action is a vote for who you're becoming.
+            Every action is a vote for who you’re becoming.
           </ThemedText>
           <ThemedText themeColor="textSecondary" style={styles.body}>
-            WHOIAM helps you break what's breaking you and build what builds you — one goal, one
+            WHOIAM helps you break what’s breaking you and build what builds you — one goal, one
             check-in, one unlocked moment of intention at a time.
           </ThemedText>
           <ThemedText themeColor="textSecondary" style={styles.body}>

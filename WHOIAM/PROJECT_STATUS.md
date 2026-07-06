@@ -74,6 +74,21 @@ first-class; v0.1.0.
 Expo + react-native-device-activity + expo-sqlite local-first · Apple Developer enrollment
 before M3 · community/chatbot/paywall in Phases 2–4.
 
+### Interim work while waiting on the gate (2026-07-06, later same day)
+
+- **Branding v1:** real app icon — a continuous ivory "W" whose last stroke rises into a
+  floating point of light (reads as "W‑i", *who I am*) on a sage-teal gradient. One SVG
+  source generates icon, splash, favicon, and Android adaptive set via
+  `npm run brand:generate` (`scripts/generate-brand-assets.mjs`); splash background now
+  deep teal `#1C463E`. Expo's default icon bundle removed.
+- **Crisis resources from day one** (pulled forward from Phase 2's safety work): Settings
+  now has an "If it's heavy right now" card — call/text **988** and **SAMHSA
+  1‑800‑662‑4357** buttons that dial even offline. Full safety layer + `docs/SAFETY.md`
+  still land with the Phase 2 chatbot.
+- **ESLint finished offline:** flat config checked in (`eslint.config.js`), all findings
+  fixed (typographic apostrophes in UI copy, hydration hook rewritten to
+  `useSyncExternalStore`); `npx eslint .` is clean. Open item closed.
+
 ## Next step
 
 **🔒 CONNOR GATE is now open.** M3 (the vault — the make-or-break feature) requires the
@@ -92,5 +107,5 @@ and (optional, no Apple account needed) polish branding (app icon/splash).
 ## Open items
 
 - Subscription pricing (decide during Phase 3)
-- Visual branding (app icon/splash still Expo defaults)
-- `expo lint` needs one online run to finish ESLint setup (cloud proxy blocks it; harmless)
+- Branding v1 shipped; review the real icon on a device home screen during M3 and iterate
+  if it doesn't land

@@ -21,13 +21,12 @@ const config: ExpoConfig = {
   ios: {
     bundleIdentifier: 'com.whoiam.app',
     supportsTablet: false,
-    icon: './assets/expo.icon',
   },
   android: {
     // Android ships in a later phase; package reserved now to match iOS.
     package: 'com.whoiam.app',
     adaptiveIcon: {
-      backgroundColor: '#F7F6F3',
+      backgroundColor: '#1C463E',
       foregroundImage: './assets/images/android-icon-foreground.png',
       backgroundImage: './assets/images/android-icon-background.png',
       monochromeImage: './assets/images/android-icon-monochrome.png',
@@ -43,9 +42,9 @@ const config: ExpoConfig = {
     [
       'expo-splash-screen',
       {
-        backgroundColor: '#2F6E62',
+        backgroundColor: '#1C463E',
         image: './assets/images/splash-icon.png',
-        imageWidth: 76,
+        imageWidth: 120,
       },
     ],
     'expo-sqlite',

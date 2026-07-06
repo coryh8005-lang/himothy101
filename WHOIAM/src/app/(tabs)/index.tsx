@@ -54,7 +54,7 @@ export default function TodayScreen() {
         <ThemedText themeColor="tint" type="smallBold">
           WHOIAM
         </ThemedText>
-        <ThemedText>Every action is a vote for who you're becoming.</ThemedText>
+        <ThemedText>Every action is a vote for who you’re becoming.</ThemedText>
       </Card>
 
       <ThemedText type="smallBold" style={styles.sectionLabel} themeColor="textSecondary">
