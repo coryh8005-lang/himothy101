@@ -26,7 +26,7 @@ const config: ExpoConfig = {
     // Android ships in a later phase; package reserved now to match iOS.
     package: 'com.whoiam.app',
     adaptiveIcon: {
-      backgroundColor: '#000000',
+      backgroundColor: '#708C8E',
       foregroundImage: './assets/images/android-icon-foreground.png',
       backgroundImage: './assets/images/android-icon-background.png',
       monochromeImage: './assets/images/android-icon-monochrome.png',
