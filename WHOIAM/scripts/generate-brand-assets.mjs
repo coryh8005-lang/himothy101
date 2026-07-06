@@ -17,8 +17,9 @@ import { fileURLToPath } from 'node:url';
 const out = join(dirname(fileURLToPath(import.meta.url)), '../assets/images');
 mkdirSync(out, { recursive: true });
 
-const TEAL_TOP = '#37806F';
-const TEAL_BOTTOM = '#1C463E';
+// Icon background: black, with a barely-there teal cast up top for depth.
+const BG_TOP = '#101614';
+const BG_BOTTOM = '#000000';
 const IVORY = '#F7F6F3';
 
 /** The W-and-rising-point mark, centered in a 1024 viewBox. */
@@ -35,8 +36,8 @@ function gradientDefs() {
   return `
     <defs>
       <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
-        <stop offset="0" stop-color="${TEAL_TOP}" />
-        <stop offset="1" stop-color="${TEAL_BOTTOM}" />
+        <stop offset="0" stop-color="${BG_TOP}" />
+        <stop offset="1" stop-color="${BG_BOTTOM}" />
       </linearGradient>
     </defs>
   `;
